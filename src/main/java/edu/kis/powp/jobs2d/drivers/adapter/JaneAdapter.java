@@ -2,15 +2,14 @@ package edu.kis.powp.jobs2d.drivers.adapter;
 
 import edu.kis.powp.jobs2d.AbstractDriver;
 import edu.kis.powp.jobs2d.Job2dDriver;
-import edu.kis.powp.jobs2d.features.DriverFeature;
 
 public class JaneAdapter extends AbstractDriver {
 
     private Job2dDriver driver;
 
-    public JaneAdapter() {
+    public JaneAdapter(Job2dDriver driver) {
         super(0, 0);
-        this.driver = DriverFeature.getDriverManager().getCurrentDriver();
+        this.driver = driver;
     }
 
     @Override

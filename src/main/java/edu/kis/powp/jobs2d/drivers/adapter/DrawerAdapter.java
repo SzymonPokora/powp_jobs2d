@@ -1,7 +1,6 @@
 package edu.kis.powp.jobs2d.drivers.adapter;
 
 import edu.kis.powp.jobs2d.Job2dDriver;
-import edu.kis.powp.jobs2d.features.DrawerFeature;
 import edu.kis.legacy.drawer.panel.DrawPanelController;
 import edu.kis.legacy.drawer.shape.ILine;
 import edu.kis.legacy.drawer.shape.LineFactory;
@@ -13,8 +12,8 @@ public class DrawerAdapter implements Job2dDriver {
     private int currentY;
     private boolean isFirst = true;
 
-    public DrawerAdapter() {
-        this.controller = DrawerFeature.getDrawerController();
+    public DrawerAdapter(DrawPanelController controller) {
+        this.controller = controller;
         this.controller.clearPanel();
     }
 

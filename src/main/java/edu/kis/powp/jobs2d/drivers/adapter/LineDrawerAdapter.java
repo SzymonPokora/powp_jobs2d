@@ -4,6 +4,7 @@ import edu.kis.powp.jobs2d.Job2dDriver;
 import edu.kis.powp.jobs2d.features.DrawerFeature;
 import edu.kis.legacy.drawer.panel.DrawPanelController;
 import edu.kis.legacy.drawer.shape.ILine;
+import edu.kis.legacy.drawer.shape.LineFactory;
 
 public class LineDrawerAdapter implements Job2dDriver {
 
@@ -15,6 +16,18 @@ public class LineDrawerAdapter implements Job2dDriver {
     public LineDrawerAdapter(ILine line) {
         this.controller = DrawerFeature.getDrawerController();
         this.line = line;
+    }
+
+    public void setLine(ILine line) {
+        this.line = line;
+    }
+
+    public void setLineType(String type) {
+        if (type.equalsIgnoreCase("basic")) {
+            this.line = LineFactory.getBasicLine();
+        } else if (type.equalsIgnoreCase("special")) {
+            this.line = LineFactory.getSpecialLine();
+        }
     }
 
     @Override

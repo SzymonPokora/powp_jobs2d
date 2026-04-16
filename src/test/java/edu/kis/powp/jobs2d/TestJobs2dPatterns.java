@@ -18,6 +18,7 @@ import edu.kis.legacy.drawer.shape.LineFactory;
 import edu.kis.powp.jobs2d.drivers.adapter.LineDrawerAdapter;
 import edu.kis.powp.jobs2d.drivers.adapter.JaneAdapter;
 import edu.kis.powp.jobs2d.magicpresets.FiguresJane;
+import edu.kis.powp.jobs2d.magicpresets.FiguresJoe;
 
 public class TestJobs2dPatterns {
 	private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -28,9 +29,17 @@ public class TestJobs2dPatterns {
 
 		application.addTest("Figure Joe 1", selectTestFigureOptionListener);
 
+		application.addTest("Figure Joe 2", e -> {
+			FiguresJoe.figureScript2(
+					DriverFeature.getDriverManager().getCurrentDriver()
+			);
+		});
+
 		application.addTest("Figure Jane", e -> {
+			Job2dDriver currentDriver = DriverFeature.getDriverManager().getCurrentDriver();
+
 			FiguresJane.figureScript(
-					new JaneAdapter()
+					new JaneAdapter(currentDriver)
 			);
 		});
 	}
@@ -43,7 +52,9 @@ public class TestJobs2dPatterns {
 		Job2dDriver testDriver = new MyAdapter();
 		DriverFeature.addDriver("Buggy Simulator", testDriver);
 
-		Job2dDriver drawerAdapter = new DrawerAdapter();
+		Job2dDriver drawerAdapter = new DrawerAdapter(
+				DrawerFeature.getDrawerController()
+		);
 		DriverFeature.addDriver("Drawer Adapter", drawerAdapter);
 
 		DriverFeature.addDriver(
