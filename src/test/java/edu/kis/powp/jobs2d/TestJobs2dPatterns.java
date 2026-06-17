@@ -8,6 +8,10 @@ import java.util.logging.Logger;
 import edu.kis.legacy.drawer.panel.DefaultDrawerFrame;
 import edu.kis.legacy.drawer.panel.DrawPanelController;
 import edu.kis.powp.appbase.Application;
+import edu.kis.powp.jobs2d.command.CommandInvoker;
+import edu.kis.powp.jobs2d.command.factory.CircleFactory;
+import edu.kis.powp.jobs2d.command.factory.RectangleFactory;
+import edu.kis.powp.jobs2d.command.generator.FiguresJoeCommandsGenerator;
 import edu.kis.powp.jobs2d.drivers.adapter.MyAdapter;
 import edu.kis.powp.jobs2d.events.SelectChangeVisibleOptionListener;
 import edu.kis.powp.jobs2d.events.SelectTestFigureOptionListener;
@@ -41,6 +45,34 @@ public class TestJobs2dPatterns {
 			FiguresJane.figureScript(
 					new JaneAdapter(currentDriver)
 			);
+		});
+
+		application.addTest("Rectangle (Command)", e -> {
+			CommandInvoker invoker = new CommandInvoker(
+					RectangleFactory.createRectangle(-60, -40, 120, 80)
+			);
+			invoker.run(DriverFeature.getDriverManager().getCurrentDriver());
+		});
+
+		application.addTest("Circle (Command)", e -> {
+			CommandInvoker invoker = new CommandInvoker(
+					CircleFactory.createCircle(0, 0, 80)
+			);
+			invoker.run(DriverFeature.getDriverManager().getCurrentDriver());
+		});
+
+		application.addTest("Figure Joe 1 (Command)", e -> {
+			CommandInvoker invoker = new CommandInvoker(
+					FiguresJoeCommandsGenerator.figureScript1()
+			);
+			invoker.run(DriverFeature.getDriverManager().getCurrentDriver());
+		});
+
+		application.addTest("Figure Joe 2 (Command)", e -> {
+			CommandInvoker invoker = new CommandInvoker(
+					FiguresJoeCommandsGenerator.figureScript2()
+			);
+			invoker.run(DriverFeature.getDriverManager().getCurrentDriver());
 		});
 	}
 
